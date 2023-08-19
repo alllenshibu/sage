@@ -17,11 +17,12 @@ const Hero = () => {
     <div className="hero">
       <div className="flex-1 pt-36 padding-x">
         <h1 className="hero__title">
-        Comprehensive Corporate Well-being Solutions
+          Comprehensive Corporate Well-being Solutions
         </h1>
 
         <p className="hero__subtitle">
-        Nurturing Minds, Boosting Success: Innovating Well-being in the Corporate World
+          Nurturing Minds, Boosting Success: Innovating Well-being in the
+          Corporate World
         </p>
 
         <CustomButton

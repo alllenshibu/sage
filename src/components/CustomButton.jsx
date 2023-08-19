@@ -1,9 +1,15 @@
-"use client";
-
 import Image from "next/image";
 import React from "react";
 
-const Button = ({ isDisabled, btnType, containerStyles, textStyles, title, rightIcon, handleClick }) => (
+const Button = ({
+  isDisabled,
+  btnType,
+  containerStyles,
+  textStyles,
+  title,
+  rightIcon,
+  handleClick,
+}) => (
   <button
     disabled={isDisabled}
     type={btnType || "button"}
