@@ -1,5 +1,3 @@
-
-
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getToken } from 'next-auth/jwt'
@@ -39,12 +37,22 @@ export async function POST(Request) {
         const { email } = await Request.json()
 
         // Database access
-        const { rows } = await pool.query(`SELECT * FROM "user" WHERE email = $1`, [email]);
+        const { rows } = await pool.query(
+            `SELECT * FROM "user" JOIN user_role as ur ON id=ur.user_id WHERE email = $1`,
+            [email]
+        );
+        console.log(rows)
 
         if (rows.length > 0) {
-            return new Response(JSON.stringify({
-                message: "User already exists"
-            }), { status: 400, })
+            if (rows[0].ur.name === 'ROLE_EMPLOYEE') {
+
+                return new Response(JSON.stringify({
+                    message: "User already exists"
+                }), { status: 400, })
+            }
+            await pool.query(
+                `UPDATE user_role SET role_id = (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE') WHERE id = $1`,
+                [rows[0].ur.id])
         }
 
         await pool.query(`INSERT INTO "user" (email) VALUES ($1)`, [email])
