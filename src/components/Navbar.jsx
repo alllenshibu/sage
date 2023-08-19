@@ -21,9 +21,13 @@ const NavBar = () => {
       <CustomButton
         title={session && session.user ? "Sign Out" : "Sign In"}
         btnType="button"
-        containerStyles="transition-all text-white rounded-full bg-blue-500 min-w-[130px] gap-1 hover:bg-blue-400"
+        containerStyles="flex items-center justify-center px-4 py-2 mr-4 md:mr-2 transition-all text-white text-sm md:text-base rounded-full bg-blue-500 gap-1 hover:bg-blue-400"
         handleClick={() =>
-          session && session.user ? signOut() : signIn("google")
+          session && session.user
+            ? signOut()
+            : signIn("google", {
+                callbackUrl: "http://127.0.0.1:3000/dashboard/",
+              })
         }
       >
         <FaGoogle />

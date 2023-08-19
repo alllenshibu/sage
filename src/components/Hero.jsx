@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+import Link from "next/link";
+
 import HeroImage from "@/assets/hero.png";
 
 import { CustomButton } from "@/components";
@@ -26,9 +28,12 @@ const Hero = () => {
           Nurturing minds,Boosting success,Innovating well-being in the
           corporate world
         </p>
-        <button className="transition-all hover:bg-blue-500 bg-blue-600 mt-4 w-max text-white text-lg rounded-3xl px-4 py-2">
+        <Link
+          href="/dashboard"
+          className="transition-all hover:bg-blue-500 bg-blue-600 mt-4 w-max text-white text-lg rounded-3xl px-4 py-2"
+        >
           Explore your mind
-        </button>
+        </Link>
       </div>
       <Image src={HeroImage} width={800} />
     </div>
