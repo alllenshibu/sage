@@ -1,5 +1,5 @@
 import CarCard from "./CarCard";
-import CustomButton from "./CustomButton";
+import CustomButton from "./CustomButton.jsx";
 import CustomFilter from "./CustomFilter";
 import Footer from "./Footer";
 import NavBar from "./Navbar";
