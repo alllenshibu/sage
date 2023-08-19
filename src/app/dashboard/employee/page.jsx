@@ -21,9 +21,24 @@ const Dashboard = async () => {
   return (
     <div className="flex flex-col items-center justify-center h-[1160px] md:h-[540px] bg-gray-100">
       <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
-        <Card title="FunZone" link="/game" img={GameImage} />
-        <Card title="CalmCheck" link="/quiz" img={QuizImage} />
-        <Card title="Grievance" link="/grievance" img={Grievance} />
+        <Card
+          title="FunZone"
+          desc="Feeling stressed out?Play some relaxing games to take your mind off things."
+          link="/game"
+          img={GameImage}
+        />
+        <Card
+          title="A small quiz"
+          desc="Take a small quiz to lighten up your mind and let your true feelings out"
+          link="/quiz"
+          img={QuizImage}
+        />
+        <Card
+          title="Grievance"
+          desc="Have any issues? Let us know,we are here to help you out"
+          link="/grievance"
+          img={Grievance}
+        />
         <StatusCard
           title="Therapy"
           link="/request"
