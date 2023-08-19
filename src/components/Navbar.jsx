@@ -22,6 +22,9 @@ const NavBar = () => {
         </Link>
 
         <CustomButton
+          rightIcon={
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/882px-Google_%22G%22_Logo.svg.png?20230305195327"
+          }
           title={session && session.user ? "Sign Out" : "Sign In"}
           btnType="button"
           containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
