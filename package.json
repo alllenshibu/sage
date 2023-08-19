@@ -25,6 +25,9 @@
     "tailwindcss-animate": "^1.0.6"
   },
   "devDependencies": {
-    "sass": "^1.66.0"
+    "@types/node": "20.5.1",
+    "@types/react": "18.2.20",
+    "sass": "^1.66.0",
+    "typescript": "5.1.6"
   }
 }
