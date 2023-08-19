@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../../../components/Card";
+import StatusCard from "@/components/StatusCard";
 // import Quiz from "./Quiz";
 // import Grievance from "./Grievance";
 // import PsychologistChat from "./PsychologistChat";
@@ -21,10 +22,11 @@ const Dashboard = async () => {
       <div className="w-full max-w-3xl grid grid-cols-1 gap-24 place-items-center md:grid-cols-3">
         <Card title="CalmCheck" link="/quiz" img={QuizImage} />
         <Card title="Grievance" link="/grievance" img={Grievance} />
-        <Card
-          title="Psychologist Chat"
-          link="/psychologist-chat"
+        <StatusCard
+          title="Therapy"
+          link="/request"
           img={DoctorImage}
+          approved={true}
         />
       </div>
     </div>
