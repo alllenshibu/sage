@@ -19,7 +19,7 @@ export async function GET(Request) {
 
 
         // Database access
-        const { rows } = await pool.query("SELECT id, subject, FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id;");
+        const { rows } = await pool.query("SELECT * FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id WHERE employee_id = $1;", [session.uid]);
 
         return new Response(JSON.stringify(rows))
     } catch (err) {
