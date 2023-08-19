@@ -1,54 +1,29 @@
-
-
-const quiz = [
-    {
-        id: 1,
-        question: 'What is the capital of India?',
-        options: [
-            'New Delhi',
-            'Mumbai',
-            'Kolkata',
-            'Chennai',
-        ],
-        answer: 'New Delhi',
-    },
-    {
-        id: 2,
-        question: 'What is the capital of USA?',
-        options: [
-            'New York',
-            'Washington DC',
-            'Los Angeles',
-            'Chicago',
-        ],
-        answer: 'Washington DC',
-    }
-]
+import { pool } from '@/lib/pg'
 
 export async function GET(Request) {
-    // Database access
-    const data = {
-        rows: quiz,
-    }
 
-    return new Response("Fsfsaf")
+    try {
+        // Check if authenticated
+        
+        // Database access
+        const { rows } = await pool.query(`SELECT * FROM quiz_question `)
+
+        return new Response(JSON.stringify(rows), { status: 200 })
+    }
+    catch (err) {
+        return new Response(err.message, { status: 500 })
+    }
 }
+
 export async function POST(Request) {
 
-    if (!answerList || answerList === '' || answerList === undefined) {
-        res.status(400).json({ message: 'Invalid answerList' })
-        return;
+    try {
+        // Check if authenticated
+        // Database access
+
+        return new Response(JSON.stringify(rows), { status: 200 })
     }
-
-    // Database access
-
-    res.status(200).json({
-        message: 'Successfully analyzed quiz',
-        data: {
-            score: 2,
-            analysis: "Bro has depresssion"
-        },
-    })
-
-    return new Response("Fsfsaf")
+    catch (err) {
+        return new Response(err.message, { status: 500 })
+    }
 }
