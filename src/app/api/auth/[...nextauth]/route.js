@@ -41,18 +41,19 @@ export const authOptions = {
     async session({ session, user, token }) {
 
       // Get user roles
-      const { rows } = await pool.query(
-        `SELECT role.name FROM "user" INNER JOIN user_role ON "user".id = user_role.user_id INNER JOIN role ON user_role.role_id = role.id WHERE "user".email = $1`,
+      let { rows } = await pool.query(
+        `SELECT role.name, "user".id FROM "user" INNER JOIN user_role ON "user".id = user_role.user_id INNER JOIN role ON user_role.role_id = role.id WHERE "user".email = $1`,
         [session.user.email]
       )
 
       // Add roles to session
       session.role = rows[0].name
+      session.uid = rows[0].id
 
-      console.log(session)
       return session
     },
     async jwt({ token, user, account, profile, isNewUser }) {
+
       return token
     }
   },
