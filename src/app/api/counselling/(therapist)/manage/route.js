@@ -33,14 +33,11 @@ export async function POST(Request) {
 
         const chatRoomId = uuid()
 
-        await pool.query(
-            "INSERT INTO counselling_session(counselling_request_id, pyschologist_id, chat_room_id) VALUES ($1, $2, $3) RETURNING id"),
-            [counsellingRequestId, session.uid, chatRoomId]
+        const { rows } = await pool.query(
+            "INSERT INTO counselling_session(counselling_request_id, psychologist_id, chat_room_id) VALUES ($1, $2, $3) RETURNING *", [counsellingRequestId, session.uid, chatRoomId])
 
-        return new Response(JSON.stringify({
-            message: "Counselling request accepted successfully",
-            counsellingSessionId: rows[0].id
-        }))
+
+        return new Response(JSON.stringify(rows))
     } catch (err) {
         return new Response(err.message, { status: 500 })
     }

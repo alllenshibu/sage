@@ -25,8 +25,8 @@ const Dashboard = async () => {
         <StatusCard
           title="Therapy"
           link="/request"
-          img={DoctorImage}
           approved={true}
+          img={DoctorImage}
         />
       </div>
     </div>
