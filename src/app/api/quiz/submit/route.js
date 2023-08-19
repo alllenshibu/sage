@@ -14,10 +14,16 @@ export async function POST(Request) {
         // Check if authenticated
         // Database access
 
-        console.log(session)
-        console.log(token)
+        const answers = await Request.json()
 
-        return new Response("Ffdsaf", { status: 200 })
+        for (let answer of answers) {
+            console.log(answer)
+            await pool.query(`
+                INSERT INTO user_quiz_answer (quiz_question_id, answer, user_id) VALUES ($1, $2, $3)`,
+                [answer.id, answer.answer, session.uid])
+        }
+
+        return new Response("Successfully submitted quiz", { status: 200 })
     }
     catch (err) {
         return new Response(err.message, { status: 500 })
