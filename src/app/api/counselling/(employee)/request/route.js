@@ -7,6 +7,7 @@ import { getToken } from 'next-auth/jwt'
 import { pool } from "@/lib/pg";
 
 
+// Remove this
 export async function GET(Request) {
 
     // Database access
@@ -18,17 +19,27 @@ export async function GET(Request) {
 
 export async function POST(Request) {
 
+    try {
 
-    const session = await getServerSession(authOptions)
-    const token = await getToken({ req: Request, authOptions: authOptions })
+        // Check if authenticated
 
-    const { subject } = await Request.json()
+        const session = await getServerSession(authOptions)
+        const token = await getToken({ req: Request, authOptions: authOptions })
 
-    const { rows } = await pool.query("INSERT INTO counselling_request (subject, employee_id) VALUES ($1, $2) RETURNING id", [subject, session.uid]);
+        // Required stuff
+
+        const { subject } = await Request.json()
+
+        // Database layer
+
+        const { rows } = await pool.query("INSERT INTO counselling_request (subject, employee_id) VALUES ($1, $2) RETURNING id", [subject, session.uid]);
 
 
-    return new Response(JSON.stringify({
-        message: "Counselling request created successfully",
-        counsellingRequestId: rows[0].id
-    }))
+        return new Response(JSON.stringify({
+            message: "Counselling request created successfully",
+            counsellingRequestId: rows[0].id
+        }))
+    } catch (err) {
+        return new Response(err.message, { status: 500 })
+    }
 }

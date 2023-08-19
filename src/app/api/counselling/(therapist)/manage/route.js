@@ -18,18 +18,26 @@ export async function GET(Request) {
 
 export async function POST(Request) {
 
+    try {
 
-    const session = await getServerSession(authOptions)
-    const token = await getToken({ req: Request, authOptions: authOptions })
+        // Check if authenticated
+        const session = await getServerSession(authOptions)
+        const token = await getToken({ req: Request, authOptions: authOptions })
 
-    const { counsellingRequestId } = await Request.json()
 
-    console.log("Bro accepted " + counsellingRequestId)
+        // Required stuff
+        const { counsellingRequestId } = await Request.json()
 
-    await pool.query("INSERT INTO counselling_session(counselling_request_id, pyschologist_id) VALUES ($1, $2) RETURNING id"), [counsellingRequestId, session.uid]
+        // Database layer
+        console.log("Bro accepted " + counsellingRequestId)
 
-    return new Response(JSON.stringify({
-        message: "Counselling request accepted successfully",
-        counsellingSessionId: rows[0].id
-    }))
+        await pool.query("INSERT INTO counselling_session(counselling_request_id, pyschologist_id) VALUES ($1, $2) RETURNING id"), [counsellingRequestId, session.uid]
+
+        return new Response(JSON.stringify({
+            message: "Counselling request accepted successfully",
+            counsellingSessionId: rows[0].id
+        }))
+    } catch (err) {
+        return new Response(err.message, { status: 500 })
+    }
 }
