@@ -9,6 +9,8 @@ DROP TABLE IF EXISTS complaint CASCADE;
 DROP TABLE IF EXISTS organization CASCADE;
 DROP TABLE IF EXISTS organization_manager CASCADE;
 DROP TABLE IF EXISTS organization_employee CASCADE;
+DROP TABLE IF EXISTS quiz_question CASCADE;
+DROP TABLE IF EXISTS user_quiz_answer CASCADE;
 
 CREATE TABLE IF NOT EXISTS "user"
 (
@@ -77,30 +79,68 @@ CREATE TABLE IF NOT EXISTS organization_employee
     FOREIGN KEY (user_id) REFERENCES "user" (id)
 );
 
+CREATE TABLE IF NOT EXISTS quiz_question
+(
+    id         UUID DEFAULT uuid_generate_v4(),
+    title     VARCHAR(256) NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS user_quiz_answer
+(
+    user_id         UUID NOT NULL,
+    quiz_question_id UUID NOT NULL,
+    answer          VARCHAR(1048) NOT NULL,
+
+    PRIMARY KEY (user_id, quiz_question_id),
+    FOREIGN KEY (user_id) REFERENCES "user" (id),
+    FOREIGN KEY (quiz_question_id) REFERENCES quiz_question (id)
+);
+
 INSERT INTO role(name)
 VALUES ('ROLE_USER'),
        ('ROLE_MANAGER'),
        ('ROLE_EMPLOYEE');
 
-INSERT INTO organization(name) VALUES ('Venture X');
+--- Inserting dummy data ---
+
+INSERT INTO organization(name)
+VALUES ('Venture X');
 
 INSERT INTO "user"(email, name)
-VALUES ('anishp8914@gmail.com', 'Anish Pillai'),
-       ('kallenshibu@gmail.com', 'Allen Shibu');
+VALUES ('kallenshibu@gmail.com', 'Allen Shibu'),
+       ('abhinavmohanmarikkal@gmail.com', 'Abhinav Manager'),
+       ('abhinavmohanan17@gmail.com', 'Abhinav Employee');
 
 INSERT INTO user_role(user_id, role_id)
-VALUES ((SELECT id FROM "user" WHERE email = 'anishp8914@gmail.com'), (SELECT id FROM role WHERE name = 'ROLE_USER')),
-       ((SELECT id FROM "user" WHERE email = 'anishp8914@gmail.com'), (SELECT id FROM role WHERE name = 'ROLE_MANAGER'));
+VALUES ((SELECT id FROM "user" WHERE email = 'abhinavmohanmarikkal@gmail.com'),
+        (SELECT id FROM role WHERE name = 'ROLE_MANAGER'));
+
+
+INSERT INTO user_role(user_id, role_id)
+VALUES ((SELECT id FROM "user" WHERE email = 'abhinavmohanan17@gmail.com'),
+        (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE'));
+
+
+INSERT INTO user_role(user_id, role_id)
+VALUES ((SELECT id FROM "user" WHERE email = 'kallenshibu@gmail.com'),
+        (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE'));
+
 
 INSERT INTO organization_employee(organization_id, user_id)
-    VALUES ((SELECT id FROM organization WHERE name = 'Venture X'), (SELECT id FROM "user" WHERE email = 'anishp8914@gmail.com'));
+VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
+        (SELECT id FROM "user" WHERE email = 'abhinavmohanan17@gmail.com'));
 INSERT INTO organization_manager(organization_id, user_id)
-    VALUES ((SELECT id FROM organization WHERE name = 'Venture X'), (SELECT id FROM "user" WHERE email = 'anishp8914@gmail.com'));
-
-
-INSERT INTO user_role(user_id, role_id)
-VALUES ((SELECT id FROM "user" WHERE email = 'kallenshibu@gmail.com'), (SELECT id FROM role WHERE name = 'ROLE_USER')),
-       ((SELECT id FROM "user" WHERE email = 'kallenshibu@gmail.com'), (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE'));
-
+VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
+        (SELECT id FROM "user" WHERE email = 'abhinavmohanmarikkal@gmail.com'));
 INSERT INTO organization_employee(organization_id, user_id)
-    VALUES ((SELECT id FROM organization WHERE name = 'Venture X'), (SELECT id FROM "user" WHERE email = 'kallenshibu@gmail.com'));
+VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
+        (SELECT id FROM "user" WHERE email = 'kallenshibu@gmail.com'));
+
+
+--- Dummy quiz ---
+INSERT INTO quiz_question(title)
+VALUES ('What is your name?'),
+       ('What is your age?'),
+       ('What is your favorite color?');
