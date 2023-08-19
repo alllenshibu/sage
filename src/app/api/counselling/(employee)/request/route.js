@@ -46,7 +46,7 @@ export async function POST(Request) {
         const prevRequest = await pool.query("SELECT * FROM counselling_request WHERE employee_id = $1", [session.uid]);
         if (prevRequest.rows.length > 0) return new Response(JSON.stringify({
             message: "You already have a pending request"
-        }))
+        }, { status: 400 }))
 
 
         const { rows } = await pool.query("INSERT INTO counselling_request (subject, employee_id) VALUES ($1, $2) RETURNING id", [subject, session.uid]);
