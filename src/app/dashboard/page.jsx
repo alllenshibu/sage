@@ -18,6 +18,7 @@ export default async function Page() {
         <h1 className="text-3xl font-semibold">
           Welcome to your personal healthcare dashboard
         </h1>
+        <p>You have not been added to any organization yet.</p>
       </div>
       <GraphCard />
 
