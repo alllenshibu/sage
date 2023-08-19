@@ -10,6 +10,8 @@ export default async function Page() {
   if (session.role === "ROLE_EMPLOYEE") return redirect("/dashboard/employee");
   else if (session.role === "ROLE_MANAGER")
     return redirect("/dashboard/manager");
+  else if (session.role === "ROLE_PSYCHOLOGIST")
+    return redirect("/dashboard/therapist");
 
   return (
     <div className="h-screen">
