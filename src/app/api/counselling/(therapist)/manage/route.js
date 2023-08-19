@@ -22,10 +22,14 @@ export async function POST(Request) {
     const session = await getServerSession(authOptions)
     const token = await getToken({ req: Request, authOptions: authOptions })
 
-    const { subject } = await Request.json()
+    const { counsellingRequestId } = await Request.json()
 
-    await pool.query("INSERT INTO counselling_request (subject, user_id) VALUES ($1, $2) RETURNING *", [subject, session.uid]);
+    console.log("Bro accepted " + counsellingRequestId)
 
+    await pool.query("INSERT INTO counselling_session(counselling_request_id, pyschologist_id) VALUES ($1, $2) RETURNING id"), [counsellingRequestId, session.uid]
 
-    return new Response("dfafsd")
+    return new Response(JSON.stringify({
+        message: "Counselling request accepted successfully",
+        counsellingSessionId: rows[0].id
+    }))
 }
