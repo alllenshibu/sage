@@ -3,6 +3,7 @@ import Image from "next/image";
 import React from "react";
 
 const Button = ({
+  children,
   isDisabled,
   btnType,
   containerStyles,
@@ -14,20 +15,11 @@ const Button = ({
   <button
     disabled={isDisabled}
     type={btnType || "button"}
-    className={`custom-btn ${containerStyles}`}
+    className={`${containerStyles}`}
     onClick={handleClick}
   >
-    <span className={`flex-1 ${textStyles}`}>{title}</span>
-    {rightIcon && (
-      <div className="relative w-6 h-6 ml-1">
-        <Image
-          src={rightIcon}
-          alt="arrow_left"
-          fill
-          className="object-contain"
-        />
-      </div>
-    )}
+    <span className={`${textStyles}`}>{title}</span>
+    {children}
   </button>
 );
 
