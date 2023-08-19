@@ -5,7 +5,7 @@ import { authOptions } from '@/app/api/auth/[...nextauth]/route'
 import { getToken } from 'next-auth/jwt'
 
 import { pool } from "@/lib/pg";
-
+import { v4 as uuid } from 'uuid'
 
 export async function GET(Request) {
 
@@ -31,7 +31,11 @@ export async function POST(Request) {
         // Database layer
         console.log("Bro accepted " + counsellingRequestId)
 
-        await pool.query("INSERT INTO counselling_session(counselling_request_id, pyschologist_id) VALUES ($1, $2) RETURNING id"), [counsellingRequestId, session.uid]
+        const chatRoomId = uuid()
+
+        await pool.query(
+            "INSERT INTO counselling_session(counselling_request_id, pyschologist_id, chat_room_id) VALUES ($1, $2, $3) RETURNING id"),
+            [counsellingRequestId, session.uid, chatRoomId]
 
         return new Response(JSON.stringify({
             message: "Counselling request accepted successfully",
