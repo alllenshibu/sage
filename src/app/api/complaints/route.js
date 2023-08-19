@@ -1,33 +1,47 @@
 
 
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import { getToken } from 'next-auth/jwt'
+
 import { pool } from "@/lib/pg";
 
 
-export async function GET(Request) {
-
-    // Database access
-    const data = await pool.query("SELECT * FROM complaint");
-
-    return new Response("Fsfsaf")
-}
-
+// Remove this
 export async function POST(Request) {
-    const title = req.body.title;
-    const description = req.body.description;
-    const userId = 'temp';
 
-    if (!title || title === '' || title === undefined) {
-        res.status(400).json({ message: 'Invalid title' })
-        return;
+    try {
+
+        // Check if authenticated
+
+        const session = await getServerSession(authOptions)
+        const token = await getToken({ req: Request, authOptions: authOptions })
+
+        console.log(Request.body)
+
+        const title = await Request.body.title
+        const description = await Request.body.description
+
+        if (!title || title === '' || title === undefined) {
+            return new Response(JSON.stringify({
+                message: "Invalid title"
+            }), { status: 400 })
+        }
+
+        if (!description || description === '' || description === undefined) {
+            return new Response(JSON.stringify({
+                message: "Invalid description"
+            }), { status: 400 })
+        }
+
+        // Database access
+        const data = await pool.query("INSERT INTO complaint (title, description, user_id) VALUES ($1, $2, $3) RETURNING *", [title, description, session.uid]);
+
+        return new Response(JSON.stringify({
+            message: "Complaint created successfully",
+        }))
+    } catch (err) {
+        console.log(err)
+        return new Response(err.message, { status: 500 })
     }
-
-    if (!description || description === '' || description === undefined) {
-        res.status(400).json({ message: 'Invalid description' })
-        return;
-    }
-
-    // Database access
-    const data = await pool.query("INSERT INTO complaint (title, description, user_id) VALUES ($1, $2, $3) RETURNING *", [title, description, userId]);
-
-    return new Response("Fsfsaf")
 }
