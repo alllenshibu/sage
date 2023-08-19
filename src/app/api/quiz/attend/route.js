@@ -1,6 +1,6 @@
 
 
-const quiz = [
+const q = [
     {
         id: 1,
         question: 'What is the capital of India?',
@@ -26,29 +26,23 @@ const quiz = [
 ]
 
 export async function GET(Request) {
-    // Database access
-    const data = {
-        rows: quiz,
+
+    try {
+        // Check if authenticated
+        // Database access
+        let quiz = [{}];
+
+        q.forEach((qz) => {
+            quiz.push({
+                id: qz.id,
+                question: qz.question,
+                options: qz.options,
+            })
+        })
+
+        return new Response(JSON.stringify(quiz), { status: 200 })
     }
-
-    return new Response("Fsfsaf")
-}
-export async function POST(Request) {
-
-    if (!answerList || answerList === '' || answerList === undefined) {
-        res.status(400).json({ message: 'Invalid answerList' })
-        return;
+    catch (err) {
+        return new Response(err.message, { status: 500 })
     }
-
-    // Database access
-
-    res.status(200).json({
-        message: 'Successfully analyzed quiz',
-        data: {
-            score: 2,
-            analysis: "Bro has depresssion"
-        },
-    })
-
-    return new Response("Fsfsaf")
 }
