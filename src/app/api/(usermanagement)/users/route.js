@@ -51,8 +51,8 @@ export async function POST(Request) {
                 }), { status: 400, })
             }
             await pool.query(
-                `UPDATE user_role SET role_id = (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE') WHERE id = $1`,
-                [rows[0].ur.id])
+                `UPDATE user_role SET role_id = (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE') WHERE user_id = $1`,
+                [rows[0].id])
         }
 
         await pool.query(`INSERT INTO "user" (email) VALUES ($1)`, [email])
