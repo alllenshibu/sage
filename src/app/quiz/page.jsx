@@ -1,27 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Question from "./Question";
 import Pagination from "./Pagination";
-
-const questions = [
-  {
-    question: "What is the capital of France?",
-    answer: "Paris",
-  },
-  {
-    question: "What is the largest planet in our solar system?",
-    answer: "Jupiter",
-  },
-  {
-    question: "What is the highest mountain in the world?",
-    answer: "Mount Everest",
-  },
-];
+import axios from "axios";
 
 const Quiz = () => {
+  const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const getQuestions = async () => {
+      const res = await axios.get("/api/quiz/attend");
+
+      console.log(res.data);
+      setQuestions(res.data);
+    };
+
+    getQuestions();
+  }, []);
 
   const handleAnswer = (answer) => {
     const newAnswers = [...answers];
@@ -37,22 +35,22 @@ const Quiz = () => {
     setCurrentQuestion(currentQuestion - 1);
   };
 
-  const handleSubmit = () => {
-    const quizData = {
-      questions: questions.map((q, i) => ({
-        question: q.question,
-        answer: q.answer,
-        userAnswer: answers[i],
-      })),
-    };
+  const handleSubmit = async () => {
+    const quizData = questions.map((q, i) => ({
+      id: q.id,
+      title: q.title,
+      answer: answers[i],
+    }));
     console.log(JSON.stringify(quizData));
+    await axios.post("/api/quiz/submit", quizData);
   };
+  if (questions.length === 0) return <div>Loading...</div>;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md">
         <Question
-          question={questions[currentQuestion].question}
+          question={questions[currentQuestion].title}
           answer={answers[currentQuestion]}
           onAnswer={handleAnswer}
         />
