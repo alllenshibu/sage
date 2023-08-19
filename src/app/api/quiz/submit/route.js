@@ -7,14 +7,17 @@ import { pool } from '@/lib/pg'
 
 export async function POST(Request) {
 
-    const session = await getServerSession(authOptions)
-    const token = await getToken({ req: Request, authOptions: authOptions })
-
     try {
         // Check if authenticated
-        // Database access
+
+        const session = await getServerSession(authOptions)
+        const token = await getToken({ req: Request, authOptions: authOptions })
+
+        // Required stuff
 
         const answers = await Request.json()
+
+        // Database layer
 
         for (let answer of answers) {
             console.log(answer)
