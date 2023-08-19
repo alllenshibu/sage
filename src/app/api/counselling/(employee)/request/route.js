@@ -19,9 +19,9 @@ export async function GET(Request) {
 
 
         // Database access
-        const { rows } = await pool.query("SELECT * FROM counselling_request JOIN counsellin", [session.uid]);
+        const { rows } = await pool.query("SELECT * FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id;");
 
-        return new Response(JSON.stringify(rows))
+        return new Response(rows)
     } catch (err) {
         return new Response(err.message, { status: 500 })
     }
@@ -44,10 +44,11 @@ export async function POST(Request) {
         // Database layer
 
         const prevRequest = await pool.query("SELECT * FROM counselling_request WHERE employee_id = $1", [session.uid]);
-        if (prevRequest.rows.length > 0) return new Response(JSON.stringify({
-            message: "You already have a pending request"
-        }, { status: 400 }))
-
+        if (prevRequest.rows.length > 0) {
+            return new Response({
+                message: "You already have a pending request"
+            }, { status: 400 })
+        }
 
         const { rows } = await pool.query("INSERT INTO counselling_request (subject, employee_id) VALUES ($1, $2) RETURNING id", [subject, session.uid]);
 
