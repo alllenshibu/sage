@@ -1,3 +1,4 @@
+"use client";
 export default function Page() {
   return (
     <div className="h-[540px] px-12 pt-12">

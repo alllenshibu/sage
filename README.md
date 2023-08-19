@@ -1,38 +1,55 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Sage: Prioritize Your Mental Well-being for Corporate Professionals
+
+Sage is a web application designed specifically for corporate professionals to help them prioritize their mental well-being, thereby maximizing productivity and achieving sustainable success with efficiency and resilience. Built using Next.js and MUI (Material-UI), Sage offers a range of features to support mental wellness within the workplace.
+
+## Features
+
+### Mental Gym
+
+Sage's Mental Gym provides employees with simple yoga and breathing techniques that can be easily practiced at their desks or during short breaks. Engaging in deep breathing exercises aids in reducing stress levels and enhancing focus, contributing to a healthier work environment.
+
+### Mental Wellness Assessment
+
+The Mental Wellness Assessment feature allows users to evaluate their current mental well-being. By providing valuable insights into their emotional state, employees can take proactive steps to manage their mental health effectively.
+
+### Employee Assistance Programs (EAPs)
+
+Sage recognizes that some stressors require professional help. Through Employee Assistance Programs (EAPs), the application grants employees access to counseling services. This resource ensures that individuals dealing with significant stressors can seek expert guidance and support in managing their mental health challenges.
+
+## Tech Stack
+
+Sage is developed using the following technologies:
+
+- **Next.js**: A React framework that offers server-side rendering and helps build fast and dynamic web applications.
+- **MUI (Material-UI)**: A popular React UI framework that provides a set of customizable components, enabling a polished and user-friendly interface.
 
 ## Getting Started
 
-First, run the development server:
+To run Sage locally, follow these steps:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the repository: `git clone https://github.com/yourusername/sage.git`
+2. Navigate to the project directory: `cd sage`
+3. Install dependencies: `npm install`
+4. Run the development server: `npm run dev`
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be accessible at `http://localhost:3000`.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Contribution
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Contributions to Sage are welcome! If you'd like to contribute, please follow these steps:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+1. Fork the repository.
+2. Create a new branch: `git checkout -b feature/your-feature-name`
+3. Make your changes and commit them: `git commit -m "Add your message here"`
+4. Push to your branch: `git push origin feature/your-feature-name`
+5. Open a pull request, detailing the changes you've made.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## License
 
-## Learn More
+Sage is released under the [MIT License](LICENSE).
 
-To learn more about Next.js, take a look at the following resources:
+## Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+If you have any questions, suggestions, or feedback, feel free to contact us at [contact@sageapp.com](mailto:contact@sageapp.com).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Let Sage be your partner in achieving professional success through prioritized mental well-being. Remember, a healthy mind leads to efficient and resilient productivity.

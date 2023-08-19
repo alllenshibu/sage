@@ -6,7 +6,7 @@ export async function GET(Request) {
     try {
         // Check if authenticated
 
-        // Database access
+        // Database layer
         const { rows } = await pool.query(`SELECT * FROM quiz_question `)
 
         return new Response(JSON.stringify(rows), { status: 200 })
