@@ -48,6 +48,7 @@ export async function POST(Request) {
         }
 
         await pool.query(`INSERT INTO "user" (email) VALUES ($1)`, [email])
+        await pool.query(`INSERT INTO "user_role" (user_id, role_id) VALUES ((SELECT id FROM "user" WHERE email = $1), (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE'))`, [email])
 
         return new Response(JSON.stringify({
             message: "User created successfully"
