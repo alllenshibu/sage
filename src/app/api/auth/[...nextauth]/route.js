@@ -47,7 +47,7 @@ export const authOptions = {
       )
 
       // Add roles to session
-      session.role = rows[0]
+      session.role = rows[0].name
 
       console.log(session)
       return session
