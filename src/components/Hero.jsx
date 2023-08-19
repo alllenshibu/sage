@@ -2,6 +2,8 @@
 
 import Image from "next/image";
 
+import HeroImage from "@/assets/hero.png";
+
 import { CustomButton } from "@/components";
 
 const Hero = () => {
@@ -14,30 +16,21 @@ const Hero = () => {
   };
 
   return (
-    <div className="hero">
-      <div className="flex-1 pt-36 padding-x">
-        <h1 className="hero__title">
-          Comprehensive Corporate Well-being Solutions
+    <div className="h-[540px] flex flex-col md:flex-row justify-center items-center">
+      <div className="flex flex-col gap-2 pl-8 md:pl-24 pt-12 md:pt-8 leading-8">
+        <h1 className="text-2xl md:text-5xl font-semibold">
+          Comprehensive Corporate
+          <br /> Well-being Solutions
         </h1>
-
-        <p className="hero__subtitle">
-          Nurturing Minds, Boosting Success: Innovating Well-being in the
-          Corporate World
+        <p className="text-xl font-medium">
+          Nurturing minds,Boosting success,Innovating well-being in the
+          corporate world
         </p>
-
-        <CustomButton
-          title="Explore Your Mind"
-          containerStyles="bg-primary-blue text-white rounded-full mt-10"
-          handleClick={handleScroll}
-        />
+        <button className="transition-all hover:bg-blue-500 bg-blue-600 mt-4 w-max text-white text-lg rounded-3xl px-4 py-2">
+          Explore your mind
+        </button>
       </div>
-      <div className="hero__image-container">
-        <div className="hero__image">
-          <Image src="/brain.png" alt="hero" fill className="object-contain" />
-        </div>
-
-        <div className="hero__image-overlay" />
-      </div>
+      <Image src={HeroImage} width={800} />
     </div>
   );
 };
