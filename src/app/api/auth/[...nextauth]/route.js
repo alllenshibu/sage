@@ -1,30 +1,51 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
+import { pool } from "@/lib/pg";
+
 export const authOptions = {
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID,
-      clientSecret: process.env.GOOGLE_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {
-    async signIn(data) {
-      const res = await fetch(`${process.env.API_URL}/api/user/register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data.user),
-      });
+    async signIn({ user, account, profile, email, credentials }) {
+      const { rows } = await pool.query(
+        `SELECT * FROM "user" WHERE email = $1`,
+        [user.email]
+      )
+
+      // Check if user exists
+      if (rows.length === 0) {
+
+        // Create user
+        await pool.query(
+          `INSERT INTO "user" (email, name) VALUES ($1, $2)`,
+          [user.email, profile.name]
+        )
+
+        // Make user as normal user
+        await pool.query(
+          `INSERT INTO user_role (user_id, role_id) VALUES ((SELECT id FROM "user" WHERE email = $1), (SELECT id FROM role WHERE name = 'ROLE_USER'))`,
+          [user.email]
+        )
+      }
+
       return true;
     },
-    async session({ session, token }) {
-      session.user.id = token.sub;
-      return session;
+    async redirect({ url, baseUrl }) {
+      return baseUrl
     },
+    async session({ session, user, token }) {
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      return token
+    }
   },
-};
+}
 
 const handler = NextAuth(authOptions);
 
