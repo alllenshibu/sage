@@ -26,7 +26,7 @@ export default function Page() {
         <GameCard
           title="See collections"
           desc="See what you have collected so far and yes there is so much."
-          link="/game/reward"
+          link="/game/collections"
           img={Collection}
         />
       </div>
