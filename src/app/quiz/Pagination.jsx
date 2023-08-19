@@ -22,13 +22,15 @@ const Pagination = ({ current, total, onNext, onPrev, onSubmit }) => {
       >
         Previous
       </button>
-      <button
-        onClick={handleNext}
-        disabled={current === total}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
-      >
-        Next
-      </button>
+      {current !== total && (
+        <button
+          onClick={handleNext}
+          disabled={current === total}
+          className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg"
+        >
+          Next
+        </button>
+      )}
       {current === total && (
         <button
           onClick={handleSubmit}
