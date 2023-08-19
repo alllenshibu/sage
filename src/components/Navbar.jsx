@@ -4,6 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
 import Logo from "../assets/brain-pic.png";
+import { FaGoogle } from "react-icons/fa";
 
 import CustomButton from "./CustomButton.jsx";
 
@@ -18,16 +19,15 @@ const NavBar = () => {
       </Link>
 
       <CustomButton
-        rightIcon={
-          "https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/882px-Google_%22G%22_Logo.svg.png?20230305195327"
-        }
         title={session && session.user ? "Sign Out" : "Sign In"}
         btnType="button"
-        containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
+        containerStyles="transition-all text-white rounded-full bg-blue-500 min-w-[130px] gap-1 hover:bg-blue-400"
         handleClick={() =>
           session && session.user ? signOut() : signIn("google")
         }
-      />
+      >
+        <FaGoogle />
+      </CustomButton>
     </header>
   );
 };
