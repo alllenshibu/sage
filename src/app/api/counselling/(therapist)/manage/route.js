@@ -10,7 +10,7 @@ import { pool } from "@/lib/pg";
 export async function GET(Request) {
 
     // Database access
-    const { rows } = await pool.query("SELECT * FROM counselling_request");
+    const { rows } = await pool.query("SELECT * FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id;");
 
     return new Response(JSON.stringify(rows))
 }
