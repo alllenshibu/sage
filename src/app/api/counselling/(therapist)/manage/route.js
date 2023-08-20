@@ -33,8 +33,10 @@ export async function POST(Request) {
 
         const chatRoomId = uuid()
 
-        const { rows } = await pool.query(
-            "INSERT INTO counselling_session(counselling_request_id, psychologist_id, chat_room_id) VALUES ($1, $2, $3) RETURNING *", [counsellingRequestId, session.uid, chatRoomId])
+        await pool.query(
+            "INSERT INTO counselling_session(counselling_request_id, psychologist_id, chat_room_id) VALUES ($1, $2, $3)", [counsellingRequestId, session.uid, chatRoomId])
+
+    const { rows } = await pool.query('SELECT * FROM "user" as u JOIN counselling_request cr on u.id = cr.employee_id LEFT JOIN counselling_session cs on cr.id = cs.counselling_request_id;');
 
 
         return new Response(JSON.stringify(rows))
