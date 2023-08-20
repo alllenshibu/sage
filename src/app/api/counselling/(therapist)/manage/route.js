@@ -10,7 +10,7 @@ import { v4 as uuid } from 'uuid'
 export async function GET(Request) {
 
     // Database access
-    const { rows } = await pool.query("SELECT * FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id;");
+    const { rows } = await pool.query('SELECT * FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id JOIN "user" as u on employee_id = u.id;');
 
     return new Response(JSON.stringify(rows))
 }
