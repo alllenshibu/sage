@@ -16,6 +16,7 @@ const page = () => {
     };
 
     getRequests();
+    console.log(requests);
   }, []);
 
   const accept = async (request) => {
@@ -31,34 +32,39 @@ const page = () => {
   };
 
   return (
-    <div>
-      {requests.map((request) => {
-        return (
-          <div className="flex flex-col gap-3">
-            <div className="flex">
-              <p>{request.id}</p>
-              <p>{request.user_id}</p>
-              <p>{request.psychologist_id}</p>
-              <p>{request.subject}</p>
-              <p>{request.chat_room_id}</p>
-              <Button
-                onClick={() => {
-                  accept(request);
-                }}
-              >
-                Accept
-              </Button>
-              <Button
-                onClick={() => {
-                  chat(request);
-                }}
-              >
-                Chat
-              </Button>
+    <div className="min-h-[540px] text-center">
+      <h1 className="text-3xl font-semibold mt-6">Current chat requests</h1>
+      <div className="flex flex-col items-center mt-8">
+        {requests.map((request) => {
+          return (
+            <div className="w-[350px] pl-2 py-2 text-left border-2 border-black rounded-xl">
+              <div>
+                <p className="my-2 pl-2 font-medium">
+                  Subject:
+                  <br />
+                  {request.subject}
+                </p>
+              </div>
+              <div>
+                <Button
+                  onClick={() => {
+                    accept(request);
+                  }}
+                >
+                  Accept
+                </Button>
+                <Button
+                  onClick={() => {
+                    chat(request);
+                  }}
+                >
+                  Chat
+                </Button>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

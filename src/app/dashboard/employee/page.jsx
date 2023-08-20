@@ -8,6 +8,7 @@ import StatusCard from "@/components/StatusCard";
 import QuizImage from "@/assets/mental-health.png";
 import DoctorImage from "@/assets/psychologist.jpeg";
 import Grievance from "@/assets/grievance.jpeg";
+import GameImage from "@/assets/game_img.jpeg";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -19,9 +20,25 @@ const Dashboard = async () => {
   if (session.role !== "ROLE_EMPLOYEE") return redirect("/");
   return (
     <div className="flex flex-col items-center justify-center h-[1160px] md:h-[540px] bg-gray-100">
-      <div className="w-full max-w-3xl grid grid-cols-1 gap-24 place-items-center md:grid-cols-3">
-        <Card title="CalmCheck" link="/quiz" img={QuizImage} />
-        <Card title="Grievance" link="/grievance" img={Grievance} />
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
+        <Card
+          title="FunZone"
+          desc="Feeling stressed out?Play some relaxing games to take your mind off things."
+          link="/game"
+          img={GameImage}
+        />
+        <Card
+          title="A small quiz"
+          desc="Take a small quiz to lighten up your mind and let your true feelings out"
+          link="/quiz"
+          img={QuizImage}
+        />
+        <Card
+          title="Grievance"
+          desc="Have any issues? Let us know,we are here to help you out"
+          link="/grievance"
+          img={Grievance}
+        />
         <StatusCard
           title="Therapy"
           link="/request"

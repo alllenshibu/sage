@@ -27,7 +27,7 @@ const StatusCard = ({ title, link, img }) => {
   }, []);
 
   return (
-    <div className="transition-all bg-white rounded-xl flex flex-col items-center w-[250px] h-[250px] shadow-lg m-2 hover:border-2 hover:border-blue-400">
+    <div className="transition-all bg-white rounded-xl flex flex-col items-center w-[250px] h-[250px] shadow-lg m-2 hover:border-2 hover:scale-105">
       <Image src={img} className="w-full h-[120px] rounded-t-xl" />
       <div className="mt-4">
         <h2 className="text-lg text-center mb-4 font-medium">{title}</h2>
