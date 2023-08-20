@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import Question from "./Question";
-import Pagination from "./Pagination";
 import axios from "axios";
+
+import { useRouter } from "next/navigation";
 
 const Quiz = () => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState([]);
+
+  const router = useRouter();
 
   useEffect(() => {
     const getQuestions = async () => {
@@ -19,48 +21,73 @@ const Quiz = () => {
     };
 
     getQuestions();
+    return () => {
+      setQuestions([]);
+    };
   }, []);
 
-  const handleAnswer = (answer) => {
-    const newAnswers = [...answers];
-    newAnswers[currentQuestion] = answer;
-    setAnswers(newAnswers);
-  };
-
-  const handleNext = () => {
-    setCurrentQuestion(currentQuestion + 1);
-  };
-
-  const handlePrev = () => {
-    setCurrentQuestion(currentQuestion - 1);
-  };
-
-  const handleSubmit = async () => {
-    const quizData = questions.map((q, i) => ({
-      id: q.id,
-      title: q.title,
-      answer: answers[i],
-    }));
-    console.log(JSON.stringify(quizData));
-    await axios.post("/api/quiz/submit", quizData);
-  };
-  if (questions.length === 0) return <div>Loading...</div>;
+  function handleClick(values) {
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    }
+    if (currentQuestion === questions.length - 1) {
+      alert("Quiz Completed");
+      router.push("/dashboard");
+    }
+  }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md">
-        <Question
-          question={questions[currentQuestion].title}
-          answer={answers[currentQuestion]}
-          onAnswer={handleAnswer}
-        />
-        <Pagination
-          current={currentQuestion + 1}
-          total={questions.length}
-          onNext={handleNext}
-          onPrev={handlePrev}
-          onSubmit={handleSubmit}
-        />
+    <div className="min-h-[570px] bg-gray-100">
+      <h1 className="text-center text-3xl font-semibold pt-12">Quiz</h1>
+      <div className="grid place-items-center mt-12">
+        {questions.length > 0 && (
+          <div className="w-[650px] flex flex-col gap-2 shadow-xl rounded-xl p-5 bg-white">
+            <h1 className="text-2xl font-semibold">
+              Question : {currentQuestion + 1}
+            </h1>
+            <h2 className="text-xl font-semibold">
+              {questions[currentQuestion].title}
+            </h2>
+            <form className="flex flex-col gap-5 mt-6">
+              <div
+                className="transition-all text-lg text-white px-2 py-1 rounded-xl font-medium bg-blue-500 hover:bg-blue-400"
+                onClick={() => {
+                  setAnswers([...answers, "1"]);
+                  handleClick();
+                }}
+              >
+                {questions[currentQuestion].option_1}
+              </div>
+              <div
+                className="transition-all text-lg text-white px-2 py-1 rounded-xl font-medium bg-blue-500 hover:bg-blue-400"
+                onClick={() => {
+                  setAnswers([...answers, "2"]);
+                  handleClick();
+                }}
+              >
+                {questions[currentQuestion].option_2}
+              </div>
+              <div
+                className="transition-all text-lg text-white px-2 py-1 rounded-xl font-medium bg-blue-500 hover:bg-blue-400"
+                onClick={() => {
+                  setAnswers([...answers, "3"]);
+                  handleClick();
+                }}
+              >
+                {questions[currentQuestion].option_3}
+              </div>
+              <div
+                className="transition-all text-lg text-white px-2 py-1 rounded-xl font-medium bg-blue-500 hover:bg-blue-400"
+                onClick={() => {
+                  setAnswers([...answers, "4"]);
+                  handleClick();
+                }}
+              >
+                {questions[currentQuestion].option_4}
+              </div>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
