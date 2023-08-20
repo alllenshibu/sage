@@ -27,13 +27,10 @@ const page = () => {
     setRequests(res.data);
   };
 
-  const chat = async (request) => {
-    router.push(
-      "/therapist/" +
-        request.chat_room_id +
-        "/" +
-        request.name.replace("%20", " ")
-    );
+  const chat = (request) => {
+    const name = request.name.replace(/%20/g, " ");
+    console.log(name);
+    router.push("/therapist/" + request.chat_room_id + "/" + name);
   };
 
   return (

@@ -59,10 +59,6 @@ export default function ChatPage() {
     setInputValue("");
   };
 
-  useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
-
   return (
     <div className="flex justify-center w-ful">
       <div className="flex rounded-3xl bg-green-50 shadow-xl p-10 flex-col h-[38rem] w-5/6">
@@ -73,7 +69,7 @@ export default function ChatPage() {
               router.push("/dashboard/therapist/requests");
             }}
           />
-          Chat with {name}
+          Chat with {name.replace(/%20/g, " ")}
         </div>
         <div className="flex-1 mt-3 overflow-y-auto">
           {messages.map((message) => (

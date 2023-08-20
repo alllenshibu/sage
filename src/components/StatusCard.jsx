@@ -48,7 +48,7 @@ const StatusCard = ({ title, link, img }) => {
                   "/therapist/" +
                   requestData[0].chat_room_id +
                   "/" +
-                  requestData[0].name.replace("%20", " ")
+                  requestData[0].name.replace(/%20/g, " ")
                 }
                 className="transition-all w-max bg-blue-600 hover:bg-blue-500 rounded-xl text-white font-medium py-2 px-4 "
               >
