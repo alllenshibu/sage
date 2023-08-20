@@ -12,9 +12,9 @@ import YogaCard from './YogaCard';
 
 // import { exerciseOptions, fetchData } from '../utils/fetchData';
 // import ExerciseCard from './ExerciseCard';
-// import Loader from './Loader';
+import Loader from './Loader';
 
-const Exercises = () => {
+const Yogas = () => {
        
     // array to store Yoga Data
     const [yogas, setYogas] = useState([])
@@ -49,13 +49,13 @@ const Exercises = () => {
 
     }
 
-    // if (!currentExercises.length) return <Loader />;
+    if (!currentYogas.length) return <Loader />;
 
 
   return (
     <Box id="yogas" sx={{ mt: { lg: '109px' } }} mt="50px" p="20px">
       <Typography variant="h4" fontWeight="bold" sx={{ fontSize: { lg: '44px', xs: '30px' } }} mb="46px">Showing Yogas</Typography>
-      <Stack direction="row" sx={{ gap: { lg: '107px', xs: '50px' } }} flexWrap="wrap" justifyContent="center">
+      <Stack direction="row" sx={{ gap: { lg: '80px', xs: '50px' } }} flexWrap="wrap" justifyContent="center">
        
           {currentYogas.map(yoga => (
             <YogaCard key={yoga.id} yoga={yoga} />
@@ -80,4 +80,4 @@ const Exercises = () => {
   );
 };
 
-export default Exercises;
+export default Yogas;

@@ -17,19 +17,9 @@ const relax = () => {
   const [yogas, setYogas] = useState([])
 
   const fetchYogaData = async() => {
-    
-
     const response = await axios.get('https://yoga-api-nzy4.onrender.com/v1/poses');
-    console.log(response.data);
     setYogas(response.data);
-    console.log(yogas);
-
-
-    // const response=await fetch("https://yoga-api-nzy4.onrender.com/v1/poses");
-    // const data=await response.json();
-    // console.log(data);
-    // setYogas(data);
-
+    
 
   }
 
@@ -64,7 +54,7 @@ const relax = () => {
       </Box>
     
     <SearchYoga />
-
+    
     <Yogas/>
 
 

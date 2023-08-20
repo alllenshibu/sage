@@ -40,7 +40,11 @@ const Dashboard = async () => {
           link="/grievance"
           img={Grievance}
         />
-        <Card title="Mental Gym" link="/relax" img={MentalGym} />
+        <Card 
+          title="Mental Gym"
+          desc="Your all-access pass to personalized mental workouts for a stronger and more resilient mind." 
+          link="/relax" 
+          img={MentalGym} />
         
         <StatusCard
           title="Therapy"
