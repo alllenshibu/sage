@@ -1,6 +1,7 @@
+"use client";
 import axios from "axios";
 export default async function Page() {
-  const res = await axios.get("http://localhost:3000/api/users");
+  const res = await axios.get("/api/users");
 
   return (
     <div className="relative min-h-[540px]">
