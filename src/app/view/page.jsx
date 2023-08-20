@@ -1,9 +1,9 @@
 "use client";
 export default async function Page() {
-  const res = await fetch(`${process.env.ORIGIN}/api/users`);
-
+  const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/users`);
+  const data = await res.json();
   return (
-    res.data && (
+    data && (
       <div className="relative min-h-[540px]">
         <h1 className="text-3xl text-center font-semibold mb-6">
           Employees Data
@@ -21,7 +21,7 @@ export default async function Page() {
             </div>
           </div>
           <div className="flex flex-col gap-2">
-            {res.data.map((user) => (
+            {data.map((user) => (
               <div className="flex gap-4 border-2 border-blue-500 px-1">
                 <div className="w-[100px]">{user.name}</div>
                 <div className="w-[300px]">{user.email}</div>
