@@ -1,8 +1,11 @@
+
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 import GraphCard from "@/components/GraphCard";
+
+
 
 export default async function Page() {
   const session = await getServerSession(authOptions);
@@ -14,6 +17,8 @@ export default async function Page() {
   else if (session.role === "ROLE_PSYCHOLOGIST")
     return redirect("/dashboard/therapist");
 
+  
+  
   return (
     <div className="h-screen">
       <div className="absolute top-[14%] left-[8%]">
