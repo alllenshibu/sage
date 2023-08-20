@@ -75,7 +75,7 @@ export default function ChatPage() {
           />
           Chat with userID
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div className="flex-1 mt-3 overflow-y-auto">
           {messages.map((message) => (
             <ChatMessage
               key={message.id}
