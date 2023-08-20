@@ -1,13 +1,10 @@
 "use client";
 import { useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Button,
-  TextField,
-} from "@mui/material";
+import Card from "@/components/Card";
+
+import AddImage from "@/assets/add_record.jpeg";
+import SeeImage from "@/assets/see_all.jpeg";
+
 import axios from "axios";
 
 const DashboardPage = () => {
@@ -35,40 +32,21 @@ const DashboardPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gradient-to-br from-blue-500 to-purple-500">
-      <div className="flex items-center justify-between p-4 bg-white shadow-lg">
-        <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <button
-          onClick={handleAddUserClick}
-          className="px-4 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none"
-        >
-          Add User
-        </button>
+    <div className="flex flex-col items-center justify-center h-[1160px] md:h-[540px] bg-gray-100">
+      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
+        <Card
+          title="Add employee"
+          desc="Add employee to the database to keep track of their records"
+          link="/game"
+          img={AddImage}
+        />
+        <Card
+          title="See all employees"
+          desc="See all employees in the database and their records in a table"
+          link="/quiz"
+          img={SeeImage}
+        />
       </div>
-      <div className="flex-1 p-4 overflow-y-auto">
-        {/* TODO: Add dashboard content here */}
-      </div>
-      <Dialog open={isAddUserModalOpen} onClose={handleAddUserModalClose}>
-        <DialogTitle>Add User</DialogTitle>
-        <DialogContent>
-          <TextField
-            label="Email"
-            value={newUserEmail}
-            onChange={handleNewUserEmailChange}
-            fullWidth
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleAddUserModalClose}>Cancel</Button>
-          <Button
-            onClick={handleAddUserSubmit}
-            variant="contained"
-            color="primary"
-          >
-            Submit
-          </Button>
-        </DialogActions>
-      </Dialog>
     </div>
   );
 };
