@@ -14,14 +14,23 @@ import MentalGym from "@/assets/mentalgym.jpg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
+import BarChart from "@/components/CharComponent";
+import { Fab } from "@mui/material";
 
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   if (!session) return redirect("/");
   if (session.role !== "ROLE_EMPLOYEE") return redirect("/");
   return (
-    <div className="flex flex-col items-center justify-center h-[1160px] md:h-[540px] bg-gray-100">
-      <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6">
+    <div className="w-full h-[650px] gap-28 flex flex-row items-center justify-center relative">
+      <div className="w-[40rem] h-[35rem] flex flex-col justify-around">
+        <div className="font-bold text-3xl">
+          Hello {session.user.name},<br />
+          Welcome to your personal health dashboard
+        </div>
+        <BarChart />
+      </div>
+      <div className="flex items-center justify-center flex-wrap w-[40rem]">
         <Card
           title="FunZone"
           desc="Feeling stressed out?Play some relaxing games to take your mind off things."
@@ -34,26 +43,35 @@ const Dashboard = async () => {
           link="/quiz"
           img={QuizImage}
         />
+        <Fab
+          variant="extended"
+          size="small"
+          color="primary"
+          sx={{
+            position: "absolute",
+            bottom: "0px",
+            right: "2rem",
+            width: "150px",
+            color: "black",
+            "&:hover": {
+              color: "white",
+            },
+          }}
+        >
+          <a href="http://localhost:3000/grievance">Grievance</a>
+        </Fab>
         <Card
-          title="Grievance"
-          desc="Have any issues? Let us know,we are here to help you out"
-          link="/grievance"
-          img={Grievance}
-        />
-        <Card 
           title="Mental Gym"
-          desc="Your all-access pass to personalized mental workouts for a stronger and more resilient mind." 
-          link="/relax" 
-          img={MentalGym} />
-        
+          desc="Your all-access pass to personalized mental workouts for a stronger and more resilient mind."
+          link="/relax"
+          img={MentalGym}
+        />
         <StatusCard
           title="Therapy"
           link="/request"
           approved={true}
           img={DoctorImage}
         />
-        
-
       </div>
     </div>
   );
