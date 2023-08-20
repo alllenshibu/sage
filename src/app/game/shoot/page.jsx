@@ -8,6 +8,8 @@ const App = () => {
   const [pos, setPos] = useState({ left: "0%", top: "28%" });
   const counter = useRef(0);
 
+  const totalplay=useRef(0);
+
   function shootDuck() {
     if (counter.current === 0) {
       alert(
@@ -16,6 +18,12 @@ const App = () => {
       setTimeout(() => {
         alert("Time's up! You shot " + counter.current + " ducks.");
         counter.current = 0;
+
+        // incrementing total play
+        totalplay.current++;
+        if(totalplay.current===3){
+          alert("You have played 3 times. Please come back tomorrow to play again.")
+        }
       }, 10000);
     }
     const left = Math.floor(Math.random() * 95) + "%";
