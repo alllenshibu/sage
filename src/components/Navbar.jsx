@@ -36,7 +36,7 @@ const NavBar = () => {
         >
           <FaGoogle />
         </CustomButton>
-        {session && session.user && path === "/" ? (
+        {session && session.user ? (
           <CustomButton
             title="View Dashboard"
             handleClick={() => {
