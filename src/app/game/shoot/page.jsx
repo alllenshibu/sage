@@ -1,14 +1,15 @@
 "use client";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 import Duck from "@/assets/duck_image.png";
 
 const App = () => {
   const [pos, setPos] = useState({ left: "0%", top: "28%" });
   const counter = useRef(0);
-
-  const totalplay=useRef(0);
+  const router = useRouter();
+  const totalplay = useRef(0);
 
   function shootDuck() {
     if (counter.current === 0) {
@@ -21,8 +22,11 @@ const App = () => {
 
         // incrementing total play
         totalplay.current++;
-        if(totalplay.current===3){
-          alert("You have played 3 times. Please come back tomorrow to play again.")
+        if (totalplay.current === 3) {
+          alert(
+            "You have played 3 times. Please come back tomorrow to play again."
+          );
+          router.push("/game/calm");
         }
       }, 10000);
     }
