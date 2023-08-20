@@ -47,9 +47,3 @@ Contributions to Sage are welcome! If you'd like to contribute, please follow th
 ## License
 
 Sage is released under the [MIT License](LICENSE).
-
-## Contact
-
-If you have any questions, suggestions, or feedback, feel free to contact us at [contact@sageapp.com](mailto:contact@sageapp.com).
-
-Let Sage be your partner in achieving professional success through prioritized mental well-being. Remember, a healthy mind leads to efficient and resilient productivity.
