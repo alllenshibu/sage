@@ -9,7 +9,6 @@ const data = {
     "ADHD",
     "Bipolar",
     "Autsim",
-    "June",
     "Schizophrenia",
   ],
   datasets: [
@@ -20,7 +19,7 @@ const data = {
       borderWidth: 1,
       hoverBackgroundColor: "rgba(0,10,150,1)",
       hoverBorderColor: "rgba(255,99,132,1)",
-      data: [65, 59, 80, 81, 56, 55, 40],
+      data: [65, 59, 80, 81, 55, 40],
     },
   ],
 };

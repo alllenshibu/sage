@@ -14,7 +14,7 @@ import MentalGym from "@/assets/mentalgym.jpg";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
-import BarChart from "@/components/CharComponent";
+import BarChart from "@/components/ChartComponent";
 import { Fab } from "@mui/material";
 
 const Dashboard = async () => {
@@ -48,6 +48,7 @@ const Dashboard = async () => {
           size="small"
           color="primary"
           sx={{
+            backgroundColor: "white",
             position: "absolute",
             bottom: "0px",
             right: "2rem",
