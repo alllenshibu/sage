@@ -9,6 +9,7 @@ import QuizImage from "@/assets/mental-health.png";
 import DoctorImage from "@/assets/psychologist.jpeg";
 import Grievance from "@/assets/grievance.jpeg";
 import GameImage from "@/assets/game_img.jpeg";
+import MentalGym from "@/assets/mentalgym.jpg";
 
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
@@ -39,12 +40,20 @@ const Dashboard = async () => {
           link="/grievance"
           img={Grievance}
         />
+        <Card 
+          title="Mental Gym"
+          desc="Your all-access pass to personalized mental workouts for a stronger and more resilient mind." 
+          link="/relax" 
+          img={MentalGym} />
+        
         <StatusCard
           title="Therapy"
           link="/request"
           approved={true}
           img={DoctorImage}
         />
+        
+
       </div>
     </div>
   );

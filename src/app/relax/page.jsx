@@ -17,19 +17,9 @@ const relax = () => {
   const [yogas, setYogas] = useState([])
 
   const fetchYogaData = async() => {
-    
-
     const response = await axios.get('https://yoga-api-nzy4.onrender.com/v1/poses');
-    console.log(response.data);
     setYogas(response.data);
-    console.log(yogas);
-
-
-    // const response=await fetch("https://yoga-api-nzy4.onrender.com/v1/poses");
-    // const data=await response.json();
-    // console.log(data);
-    // setYogas(data);
-
+    
 
   }
 
@@ -37,7 +27,7 @@ const relax = () => {
     fetchYogaData()
   }, [])
 
-  if(yogas.length===0)  return(<div>Loading...</div>);
+ 
 
   return (
 
@@ -46,10 +36,10 @@ const relax = () => {
         
 
     <Box sx={{ mt: { lg: '212px', xs: '70px' }, ml: { sm: '50px' } }} position="relative" p="20px">
-        <Typography color="#0000FF" fontWeight="600" fontSize="26px">Mental Gym</Typography>
-        <Typography fontWeight={700} sx={{ fontSize: { lg: '44px', xs: '40px' } }} mb="23px" mt="30px">
-        Stress-Free  <br />
-        Flow
+        <Typography color="#0000FF" fontWeight="700" fontSize="36px">Relax</Typography>
+        <Typography fontWeight={600} sx={{ fontSize: { lg: '44px', xs: '40px' } }} mb="23px" mt="30px">
+        Stress-Free Flow  <br />
+        
         </Typography>
         <Typography fontSize="22px" fontFamily="Alegreya" lineHeight="35px">
         Discover Your Yoga Flow: Personalized Yoga Sessions
@@ -64,7 +54,7 @@ const relax = () => {
       </Box>
     
     <SearchYoga />
-
+    
     <Yogas/>
 
 
