@@ -84,17 +84,21 @@ CREATE TABLE IF NOT EXISTS organization_employee
 
 CREATE TABLE IF NOT EXISTS quiz_question
 (
-    id    UUID DEFAULT uuid_generate_v4(),
-    title VARCHAR(256) NOT NULL,
+    id       UUID DEFAULT uuid_generate_v4(),
+    title    VARCHAR(256) NOT NULL,
+    option_1 VARCHAR(256) NOT NULL,
+    option_2 VARCHAR(256) NOT NULL,
+    option_3 VARCHAR(256) NOT NULL,
+    option_4 VARCHAR(256) NOT NULL,
 
     PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS user_quiz_answer
 (
-    user_id          UUID          NOT NULL,
-    quiz_question_id UUID          NOT NULL,
-    answer           VARCHAR(1048) NOT NULL,
+    user_id          UUID NOT NULL,
+    quiz_question_id UUID NOT NULL,
+    answer           INT  NOT NULL,
 
     PRIMARY KEY (user_id, quiz_question_id),
     FOREIGN KEY (user_id) REFERENCES "user" (id),
@@ -211,7 +215,29 @@ VALUES ((SELECT id FROM "user" WHERE email = 'allenshibu@outlook.in'),
 
 
 --- Dummy quiz ---
-INSERT INTO quiz_question(title)
-VALUES ('What is your name?'),
-       ('What is your age?'),
-       ('What is your favorite color?');
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('On a scale of 1 to 10, how often do you feel overwhelmed by your workload?',
+        'Not at all', 'Occasionally', 'Quite often', 'Very Frequently');
+
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('How well are you sleeping lately?',
+        'Very Well', 'Fairly Well', 'Not wo well', 'Not well at all');
+
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('How often do you find it difficult to disconnect from work during your personal time?',
+        'Rarely', 'Sometimes', 'Often', 'Almost always');
+
+
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('How would you rate your overall mood and emotional well-being recently?',
+        'Very Positive', 'Generally positive', 'Neutral', 'Negative');
+
+
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('Are you satisfied with your work-life balance?',
+        'Very Satisfied', 'Somewhat satisfied', 'Somewhat unsatisfied', 'Very unsatisfied');
+INSERT INTO quiz_question(title, option_1, option_2, option_3, option_4)
+VALUES ('How often do you find it challenging to focus and concentrate on your tasks?',
+        'Rarely', 'Sometimes', 'Often', 'Almost always');
+
+
