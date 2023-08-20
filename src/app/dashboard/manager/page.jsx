@@ -13,7 +13,7 @@ const DashboardPage = async () => {
   if (!session) {
     redirect("/login");
   }
-  if (session.role == "ROLE_MANAGER") {
+  if (session.role !== "ROLE_MANAGER") {
     redirect("/dashboard");
   }
 
