@@ -46,13 +46,15 @@ const page = () => {
                 </p>
               </div>
               <div>
-                <Button
-                  onClick={() => {
-                    accept(request);
-                  }}
-                >
-                  Accept
-                </Button>
+                {request.chat_room_id === null && (
+                  <Button
+                    onClick={() => {
+                      accept(request);
+                    }}
+                  >
+                    Accept
+                  </Button>
+                )}
                 <Button
                   onClick={() => {
                     chat(request);
