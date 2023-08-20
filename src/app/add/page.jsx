@@ -7,7 +7,10 @@ export default function Page() {
   async function handleSubmit(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
+    if (!formData.get("email")) return alert("Please enter email");
+    if (!formData.get("name")) return alert("Please enter name");
     await axios.post("/api/users", {
+      name: formData.get("name"),
       email: formData.get("email"),
     });
     router.push("/dashboard");
@@ -24,11 +27,10 @@ export default function Page() {
             className="pl-2 py-1 md:py-2 border-2 border-black rounded-lg outline-none focus:border-2 focus:border-blue-500"
           />
         </div>
-        <button></button>
         <div className="flex flex-col gap-3">
           <label htmlFor="">Email</label>
           <input
-            type="text"
+            type="email"
             name="email"
             className="pl-2 py-1 md:py-2 border-2 border-black rounded-lg outline-none focus:border-2 focus:border-blue-500"
           />

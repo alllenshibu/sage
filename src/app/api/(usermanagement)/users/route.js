@@ -34,7 +34,7 @@ export async function POST(Request) {
         const session = await getServerSession(authOptions)
         const token = await getToken({ req: Request, authOptions: authOptions })
 
-        const { email } = await Request.json()
+        const { email, name } = await Request.json()
 
         // Database access
         const { rows } = await pool.query(
@@ -55,7 +55,7 @@ export async function POST(Request) {
                 [rows[0].id])
         }
 
-        await pool.query(`INSERT INTO "user" (email) VALUES ($1)`, [email])
+        await pool.query(`INSERT INTO "user" (email, name) VALUES ($1, $2)`, [email, name])
         await pool.query(`INSERT INTO "user_role" (user_id, role_id) VALUES ((SELECT id FROM "user" WHERE email = $1), (SELECT id FROM role WHERE name = 'ROLE_EMPLOYEE'))`, [email])
 
         return new Response(JSON.stringify({
