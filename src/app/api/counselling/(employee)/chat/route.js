@@ -21,8 +21,10 @@ export async function GET(Request) {
         if (session.role === 'ROLE_EMPLOYEE') {
 
             // Database access
-            const { rows } = await pool.query('SELECT chat_room_id FROM counselling_request LEFT JOIN counselling_session cs on counselling_request.id = cs.counselling_request_id JOIN "user" as u ON psychologist_id = u.id WHERE employee_id = $1;', [session.uid]);
+            const { rows } = await pool.query('SELECT * FROM "user" as u JOIN counselling_request cr on u.id = cr.employee_id LEFT JOIN counselling_session cs on cr.id = cs.counselling_request_id;', [session.uid]);
 
+
+            
 
             if (rows.length === 0) {
                 return new Response(JSON.stringify({
