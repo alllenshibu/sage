@@ -19,7 +19,11 @@ const Dashboard = async () => {
     <div className="flex flex-col items-center justify-center h-[1160px] md:h-[540px] bg-gray-100">
       <div className="w-full max-w-3xl grid grid-cols-1 gap-24 place-items-center md:grid-cols-2">
         <Card title="Responses" link="/quiz" img={ResponseImage} />
-        <Card title="Chat requests" link="/grievance" img={ChatApp} />
+        <Card
+          title="Chat requests"
+          link="/dashboard/therapist/requests"
+          img={ChatApp}
+        />
       </div>
     </div>
   );
