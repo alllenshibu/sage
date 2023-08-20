@@ -22,7 +22,7 @@ const Dashboard = async () => {
   if (!session) return redirect("/");
   if (session.role !== "ROLE_EMPLOYEE") return redirect("/");
   return (
-    <div className="w-full h-[650px] gap-28 flex flex-row items-center justify-center relative">
+    <div className="w-full h-[650px] gap-20 flex flex-row items-center justify-center relative">
       <div className="w-[40rem] h-[35rem] flex flex-col justify-around">
         <div className="font-bold text-3xl">
           Hello {session.user.name},<br />
@@ -30,7 +30,7 @@ const Dashboard = async () => {
         </div>
         <BarChart />
       </div>
-      <div className="flex items-center justify-center flex-wrap w-[40rem]">
+      <div className="flex items-center justify-center flex-wrap gap-3 w-[40rem]">
         <Card
           title="FunZone"
           desc="Feeling stressed out?Play some relaxing games to take your mind off things."
