@@ -1,8 +1,9 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { FaArrowLeft } from "react-icons/fa";
 import { useSession } from "next-auth/react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
   addDoc,
   collection,
@@ -21,6 +22,7 @@ export default function ChatPage() {
   const { data: session } = useSession();
   const messagesEndRef = useRef(null);
   const { chatId } = useParams();
+  const router = useRouter();
 
   useEffect(() => {
     const messagesRef = collection(db, "messages");
@@ -62,35 +64,46 @@ export default function ChatPage() {
   }, [messages]);
 
   return (
-    <div className="flex flex-col h-screen">
-      <div className="flex-1 overflow-y-auto">
-        {messages.map((message) => (
-          <ChatMessage
-            key={message.id}
-            message={message}
-            currentUser={session}
+    <div className="flex justify-center w-ful">
+      <div className="flex rounded-3xl bg-green-50 shadow-xl p-10 flex-col h-[38rem] w-5/6">
+        <div className="flex gap-2 items-center">
+          <FaArrowLeft
+            className="cursor-pointer"
+            onClick={() => {
+              router.push("/dashboard/therapist/requests");
+            }}
           />
-        ))}
-        <div ref={messagesEndRef} />
-      </div>
-      <form
-        onSubmit={handleFormSubmit}
-        className="flex items-center p-4 bg-white shadow-lg"
-      >
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="Type your message here..."
-          className="flex-1 p-2 mr-4 bg-gray-100 rounded-full focus:outline-none"
-        />
-        <button
-          type="submit"
-          className="px-4 py-2 text-white bg-blue-500 rounded-full hover:bg-blue-600 focus:outline-none"
+          Chat with userID
+        </div>
+        <div className="flex-1 overflow-y-auto">
+          {messages.map((message) => (
+            <ChatMessage
+              key={message.id}
+              message={message}
+              currentUser={session}
+            />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+        <form
+          onSubmit={handleFormSubmit}
+          className="flex items-center p-4 bg-white  rounded-3xl shadow-lg"
         >
-          Send
-        </button>
-      </form>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleInputChange}
+            placeholder=" Type your message here..."
+            className="flex-1 p-2 mr-4 bg-light-white-100 rounded-full focus:outline-none focus:bg-white focus:border-blue-400"
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 text-white bg-green-400 rounded-full hover:bg-blue-600"
+          >
+            Send
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

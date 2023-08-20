@@ -10,10 +10,10 @@ const ChatMessage = ({ message, currentUser }) => {
       } mb-4`}
     >
       <div
-        className={`max-w-xs rounded-lg ${
+        className={`max-w-xs rounded-tl-xl rounded-tr-xl  ${
           isSentByCurrentUser
-            ? "bg-blue-500 text-white"
-            : "bg-gray-100 text-gray-900"
+            ? "bg-green-100 text-black rounded-bl-xl"
+            : "bg-amber-100 text-black rounded-br-xl"
         } p-2`}
       >
         <p className="text-sm">{message.text}</p>
