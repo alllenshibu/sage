@@ -146,7 +146,9 @@ VALUES ('kallenshibu@gmail.com', 'Allen Shibu'),
        ('abhinavmohanan1732003@gmail.com', 'Abhinav Psycho'),
        ('amilpa2017@gmail.com', 'Amil Psycho'),
        ('anishp8914@gmail.com', 'Anish Pillai'),
-       ('allenshibu@outlook.in', 'Allen Psycho');
+       ('allenshibu@outlook.in', 'Allen Psycho'),
+    ('psjavad2543@gmail.com', 'Amil Manager');
+;
 
 
 INSERT INTO organization_employee(organization_id, user_id)
@@ -173,6 +175,12 @@ VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
 INSERT INTO organization_employee(organization_id, user_id)
 VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
         (SELECT id FROM "user" WHERE email = 'allenshibu@outlook.in'));
+
+INSERT INTO organization_employee(organization_id, user_id)
+VALUES ((SELECT id FROM organization WHERE name = 'Venture X'),
+        (SELECT id FROM "user" WHERE email = 'psjavad2543@gmail.com'));
+
+
 
 
 INSERT INTO user_role(user_id, role_id)
@@ -212,6 +220,9 @@ VALUES ((SELECT id FROM "user" WHERE email = 'anishp8914@gmail.com'),
 INSERT INTO user_role(user_id, role_id)
 VALUES ((SELECT id FROM "user" WHERE email = 'allenshibu@outlook.in'),
         (SELECT id FROM role WHERE name = 'ROLE_PSYCHOLOGIST'));
+INSERT INTO user_role(user_id, role_id)
+VALUES ((SELECT id FROM "user" WHERE email = 'psjavad2543@gmail.com'),
+        (SELECT id FROM role WHERE name = 'ROLE_MANAGER'));
 
 
 --- Dummy quiz ---
