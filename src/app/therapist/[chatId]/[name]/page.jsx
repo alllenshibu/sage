@@ -21,7 +21,7 @@ export default function ChatPage() {
   const [inputValue, setInputValue] = useState("");
   const { data: session } = useSession();
   const messagesEndRef = useRef(null);
-  const { chatId } = useParams();
+  const { chatId, name } = useParams();
   const router = useRouter();
 
   useEffect(() => {
@@ -73,7 +73,7 @@ export default function ChatPage() {
               router.push("/dashboard/therapist/requests");
             }}
           />
-          Chat with userID
+          Chat with {name}
         </div>
         <div className="flex-1 mt-3 overflow-y-auto">
           {messages.map((message) => (
