@@ -17,6 +17,8 @@ import { redirect } from "next/navigation";
 import BarChart from "@/components/ChartComponent";
 import { Fab } from "@mui/material";
 
+import Link from "next/link";
+
 const Dashboard = async () => {
   const session = await getServerSession(authOptions);
   if (!session) return redirect("/");
@@ -59,7 +61,7 @@ const Dashboard = async () => {
             },
           }}
         >
-          <a href="http://localhost:3000/grievance">Grievance</a>
+          <Link href="/grievance">Grievance</Link>
         </Fab>
         <Card
           title="Mental Gym"
