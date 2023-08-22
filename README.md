@@ -1,4 +1,4 @@
-# Sage: Prioritize Your Mental Well-being for Corporate Professionals
+# Sage: Prioritize Your Mental Well-being for Corporate Professionals 
 
 Sage is a web application designed specifically for corporate professionals to help them prioritize their mental well-being, thereby maximizing productivity and achieving sustainable success with efficiency and resilience. Built using Next.js and MUI (Material-UI), Sage offers a range of features to support mental wellness within the workplace.
 
